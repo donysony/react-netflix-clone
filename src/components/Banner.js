@@ -9,7 +9,7 @@ export default function Banner() {
     const [isClicked, setIsClicked] = useState(false);
     console.log("banner실행")
     useEffect(() => {
-        console.log("useEffect 실행")
+        console.log("banner의 useEffect 실행")
         //컴포넌트가 실행될 떄 정보를 가지고 있어야하므로 fetchData를 콜함
         fetchData();
     }, []);
@@ -55,7 +55,16 @@ export default function Banner() {
                 >
                     <h1>{movie.title || movie.name || movie.original_name}</h1>
                     <div className='banner__buttons'>
-                        <button className='banner__button play' onClick={()=> setIsClicked(true)}>Play</button>
+                    {movie.videos && movie.videos.results.length > 0 ? (
+          // `videos.results` 값이 있을 경우 Play 버튼을 렌더링
+            <button className='banner__button play' onClick={() => setIsClicked(true)}>
+            Play
+            </button>
+        ) : (
+          // `videos.results` 값이 없을 경우 다른 처리를 수행하거나 다른 버튼을 렌더링
+            <button className='banner__button other'>Other Action</button>
+        )}
+                        {/* <button className='banner__button play' onClick={(movie)=> {console.log(movie.videos.results); setIsClicked(true); }}>Play</button> */}
                         <button className='banner__button info'>More Information</button>
                     </div>
                 <h1 className='banner__description'>{truncate(movie.overview)}</h1>
@@ -73,11 +82,12 @@ export default function Banner() {
                 <Iframe 
                 width="640" 
                 height="360" 
-                src={`https://www.youtube.com/embed/${movie.videos.results[0].key}?controls=0&autoplay=1&loop=1&mute=1&playlist=${movie.videos.results[0].key}`} 
+                src={`https://www.youtube.com/embed/${movie.videos.results[0]?.key}?controls=0&autoplay=1&loop=1&mute=1&playlist=${movie.videos.results[0]?.key}`} 
                 title="YouTube video player" 
                 frameborder="0" 
                 allow="autoplay; fullscreen" 
-                allowfullscreen></Iframe>
+                // allowFullScreen
+                ></Iframe>
                 </HomeContainer>
             </Container>
 
