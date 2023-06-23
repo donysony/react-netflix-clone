@@ -74,7 +74,7 @@ h2 {
   scroll-behavior: smooth;
 }
 .row__posters::-webkit-scrollbar {
-  /* display: none; */
+  display: none;
 }
 .row__poster {
   object-fit: contain;
