@@ -43,9 +43,7 @@ export default function Row({isLargeRow, title, id, fetchUrl}) {
             <div className='slider__arrow-left'>
                 <span className='arrow' onClick={()=>{
                     console.log("click")
-                    console.log(document.getElementById(id))
                     document.getElementById(id).scrollLeft -= (window.innerWidth - 80);
-                    document.getElementById(id).scrollLeft = document.getElementById(id).scrollLeft - (window.innerWidth - 80)
                 }}>
                     {"<"}
                 </span>
